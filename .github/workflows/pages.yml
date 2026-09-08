@@ -1,0 +1,47 @@
+name: Publish GitHub Pages
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+concurrency:
+  group: pages
+  cancel-in-progress: false
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: frontend/package-lock.json
+      - name: Validate media configuration
+        env:
+          MEDIA_BASE_URL: ${{ vars.MEDIA_BASE_URL }}
+        run: |
+          node -e "const u=new URL(process.env.MEDIA_BASE_URL); if(u.protocol!=='https:') throw Error('MEDIA_BASE_URL must be a public HTTPS URL');"
+          test -s frontend/public/subtitles.json
+      - run: npm ci
+        working-directory: frontend
+      - run: node --test src/catalog.test.js
+        working-directory: frontend
+      - run: npm run build
+        working-directory: frontend
+        env:
+          VITE_DATA_MODE: static
+          VITE_MEDIA_BASE_URL: ${{ vars.MEDIA_BASE_URL }}
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: frontend/dist
+      - name: Deploy
+        id: deployment
+        uses: actions/deploy-pages@v4

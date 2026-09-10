@@ -8,3 +8,5 @@
 
 /* Compact cards and a quieter page header. */
 header{height:76px}.hero{margin-top:32px}.compact{margin-top:8px;margin-bottom:26px}.compact h1{margin:8px 0 12px}.video-grid .quote-details{height:151px;padding:12px 17px 14px}.video-grid .quote-meta{height:18px}.video-grid .quote-content{margin-top:9px}.video-grid .en{font-size:18px;line-height:25px;height:50px;margin-bottom:8px}.video-grid .zh{line-height:20px;height:40px}.video-grid .player-bottom{padding:7px 14px}@media(max-width:600px){header{height:68px}.hero{margin-top:24px}.compact{margin-top:8px}}
+
+.semantic-results{margin-top:36px}.semantic-results h2{font-size:20px}.semantic-results>p{color:#77816e;font-size:14px;margin:12px 0 20px}.match-reason{height:42px;margin:0;padding:0 24px 14px;font-size:12px;line-height:20px;color:#77816e;overflow:hidden}

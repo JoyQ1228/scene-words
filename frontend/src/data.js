@@ -22,6 +22,19 @@ export async function findQuotes(q, offset, signal) {
   if (!response.ok) throw new Error('搜索暂时不可用，请稍后重试。');
   return response.json();
 }
+export async function relatedQuotes(q, signal) {
+  const endpoint = import.meta.env.VITE_SEARCH_API_URL;
+  if (!endpoint) throw new Error('意思匹配暂未启用');
+  const response = await fetch(`${endpoint}/search?${new URLSearchParams({q})}`, {signal});
+  if (!response.ok) throw new Error(response.status === 429 ? '搜索较频繁，请稍后再试。' : '意思匹配暂时不可用，仍可查看原文结果。');
+  const {matches} = await response.json();
+  const all = await loadCatalog();
+  const exactIds = new Set(searchCatalog(all, q, 0, all.length).results.map(r => r.id));
+  return matches.filter(m => !exactIds.has(m.id)).map(m => {
+    const row = all.find(r => r.id === m.id);
+    return row ? {...row, reason:m.reason} : null;
+  }).filter(Boolean);
+}
 export function posterUrl(id) {
   return staticMode ? mediaUrl(base, id, 'jpg') : `/api/clips/${id}/poster`;
 }

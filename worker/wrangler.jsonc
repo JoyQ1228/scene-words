@@ -1,0 +1,11 @@
+{
+  "name": "scene-words-search",
+  "main": "index.js",
+  "compatibility_date": "2026-09-08",
+  "workers_dev": true,
+  "vars": {"ALLOWED_ORIGIN":"https://joyq1228.github.io", "DEEPSEEK_MODEL":"deepseek-chat"},
+  "ratelimits": [
+    {"name":"PER_IP", "namespace_id":"1001", "simple":{"limit":5,"period":60}},
+    {"name":"TOTAL", "namespace_id":"1002", "simple":{"limit":20,"period":60}}
+  ]
+}

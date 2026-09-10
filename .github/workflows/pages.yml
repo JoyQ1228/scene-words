@@ -38,6 +38,7 @@ jobs:
         env:
           VITE_DATA_MODE: static
           VITE_MEDIA_BASE_URL: ${{ vars.MEDIA_BASE_URL }}
+          VITE_SEARCH_API_URL: ${{ vars.SEARCH_API_URL }}
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with:

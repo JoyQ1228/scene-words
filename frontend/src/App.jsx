@@ -107,7 +107,7 @@ function App() {
   function reset() { aiRequest.current?.abort(); setRelated([]); setAiStatus(''); request.current?.abort(); ++serial.current; setInput(''); setQuery(''); setSearched(false); setRows([]); setActive(null); setError(''); setLoading(false); setMore(false); inputRef.current?.focus(); }
   const semanticBadge = !loading && related.length > 0 ? <span className="result-extra">＋{related.length} 意思相近</span> : null;
   return <div className="app">
-    <header><button className="brand" onClick={reset} aria-label="Scene Words 首页"><span className="brand-symbol">s<span>ᴡ</span></span><span>scene<span className="brand-light">words</span><i/></span></button><span className="header-note">A LITTLE ENGLISH. A LITTLE CINEMA.</span></header>
+    <header><button className="brand" onClick={reset} aria-label="Scene Words 首页"><span className="brand-symbol">s<span>ᴡ</span></span><span>Scene <span className="brand-light">Words</span><i/></span></button><span className="header-note">A LITTLE ENGLISH. A LITTLE CINEMA.</span></header>
     <main>
       <section className={`hero ${searched ? 'compact' : ''}`}>
         
@@ -132,7 +132,7 @@ function App() {
         {!loading && rows.length > 0 && rows.length < total && <button className="load-more" disabled={more} onClick={() => runSearch(query, true)}>{more ? '正在加载…' : `继续发现 · 已展示 ${rows.length} / ${total} 句`}</button>}
         {!loading && rows.length > 0 && aiStatus === 'error' && <p className="semantic-note" role="status">意思相近的台词暂时没找到，稍后可重试。</p>}
       </section>}
-    </main><footer><span>scene words <span className="footer-dot">·</span> 让表达，有画面。</span><span>ONE FILM. A THOUSAND WAYS TO SAY IT.</span></footer>
+    </main><footer><span>Scene Words <span className="footer-dot">·</span> 让表达，有画面。</span><span>ONE FILM. A THOUSAND WAYS TO SAY IT.</span></footer>
   </div>;
 }
 createRoot(document.getElementById('root')).render(<App/>);

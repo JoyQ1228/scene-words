@@ -107,7 +107,7 @@ function App() {
   function reset() { aiRequest.current?.abort(); setRelated([]); setAiStatus(''); request.current?.abort(); ++serial.current; setInput(''); setQuery(''); setSearched(false); setRows([]); setActive(null); setError(''); setLoading(false); setMore(false); inputRef.current?.focus(); }
   const semanticBadge = !loading && related.length > 0 ? <span className="result-extra">＋{related.length} 意思相近</span> : null;
   return <div className="app">
-    <header><button className="brand" onClick={reset} aria-label="Scene Words 首页"><span className="brand-symbol">s<span>ᴡ</span></span><span>Scene <span className="brand-light">Words</span><i/></span></button><span className="header-note">A LITTLE ENGLISH. A LITTLE CINEMA.</span></header>
+    <header><button className="brand" onClick={reset} aria-label="Scene Words 首页"><span className="brand-symbol">s<span>ᴡ</span></span><span>scene<span className="brand-light">words</span><i/></span></button><span className="header-note">A LITTLE ENGLISH. A LITTLE CINEMA.</span></header>
     <main>
       <section className={`hero ${searched ? 'compact' : ''}`}>
         
